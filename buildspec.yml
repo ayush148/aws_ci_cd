@@ -5,7 +5,7 @@ env:
     IMAGE_REPO_NAME: cicd        # your Docker Hub repo name, e.g., <username>/<repo-name>
     DOCKER_USERNAME: sharpandtannan   # your Docker Hub username
     DOCKER_PASSWORD: sharptannan   # your Docker Hub password or token
-    TAG: test_1
+    TAG: test_2
     AWS_REGION: ap-south-1         # change to your region
   git-credential-helper: yes
 
@@ -30,3 +30,4 @@ artifacts:
   files:
     - imagedefinitions.json
   discard-paths: yes
+
