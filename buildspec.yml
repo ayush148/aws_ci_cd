@@ -6,7 +6,6 @@ env:
     DOCKER_USERNAME: sharpandtannan   # your Docker Hub username
     DOCKER_PASSWORD: sharptannan
     AWS_REGION: ap-south-1         # change to your region
-    IMAGE_TAG: test:1
   git-credential-helper: yes
 
 phases:
@@ -17,6 +16,7 @@ phases:
 
       # Derive image tag (you can change this logic)
       - echo "Setting IMAGE_TAG..."
+      - IMAGE_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION:0:7}   # short git sha
       # Or: IMAGE_TAG=${CODEBUILD_BUILD_NUMBER}
       - echo "Image tag = $IMAGE_TAG"
 
@@ -31,6 +31,7 @@ phases:
     commands:
       - echo "Pushing Docker image to Docker Hub..."
       - docker push $DOCKER_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push $DOCKER_USERNAME/$IMAGE_REPO_NAME:latest
 
 artifacts:
   files:
